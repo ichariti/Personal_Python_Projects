@@ -6,7 +6,11 @@ url='https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/'
 hook='https://discord.com/api/webhooks/1355189948168278261/WypX4P9tx-ijTTfZ-jNfW4RXYZwgK5KQU51bk530ZytAmC4Avublpxw4FICgAxbs6ZNV'
 
 while(True):
-    html=get(url)
+    try:
+        html=get(url)
+    except:
+        print("HTTP GET request failed")
+        continue
     soup=BeautifulSoup(html.content, 'html5lib')
     if(soup.find('div', {'class': 'date'}).text == 'To be announced'):
         post(hook, json={'content':'keep huffing copium'})
